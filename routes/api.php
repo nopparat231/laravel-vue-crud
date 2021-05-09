@@ -14,5 +14,6 @@ use App\Http\Controllers\ProductController;
 Route::middleware('api')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('menus', MenuController::class);
+    Route::resource('orders', OrderController::class);
 });
 

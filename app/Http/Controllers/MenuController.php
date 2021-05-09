@@ -52,22 +52,4 @@ class MenuController extends Controller
         return response()->json('Menu deleted!');
     }
 
-    //สั่งอาหาร
-    public function order(Request $request)
-    {
-            $menu = new Menu([
-            'user_id'      => '1',
-            'restaurant_id'=> '1',
-            'menu_name'    => $request->input('menu_name'),
-            'menu_img'     => $request->input('menu_img'),
-            'menu_detail'  => '1',
-            'menu_status'  => '0'
-        ]);
-        $menu->save();
-        
-
-        return response()->json('Menu deleted!');
-    }
-
-
 }

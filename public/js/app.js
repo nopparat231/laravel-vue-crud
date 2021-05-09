@@ -2107,9 +2107,9 @@ __webpack_require__.r(__webpack_exports__);
     addMenu: function addMenu() {
       var _this = this;
 
-      this.axios.post('http://localhost:8000/api/menus', this.menu).then(function (response) {
-        return console.log(response);
-      })["catch"](function (err) {
+      this.axios.post('http://localhost:8000/api/menus', this.menu).then(response(this.$router.push({
+        name: 'menu-list'
+      })))["catch"](function (err) {
         return console.log(err);
       })["finally"](function () {
         return _this.loading = false;
@@ -2250,10 +2250,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      menus: []
+      menus: [],
+      isHidden: false
     };
   },
   created: function created() {
@@ -2275,15 +2321,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.menus.splice(i, 1);
       });
     },
-    OrderMenu: function OrderMenu(id) {
+    OrderMenu: function OrderMenu() {
       var _this3 = this;
 
-      this.axios.post("http://localhost:8000/api/menus/".concat(id)).then(function (response) {
-        var i = _this3.menus.map(function (data) {
-          return data.id;
-        }).indexOf(id);
-
-        _this3.menus.splice(i, 1);
+      this.axios.post("http://localhost:8000/api/orders", this.order).then(function (response) {
+        return console.log(response);
+      })["catch"](function (err) {
+        return console.log(err);
+      })["finally"](function () {
+        return _this3.loading = false;
       });
     }
   }
@@ -2437,7 +2483,7 @@ var routes = [{
   component: _components_menu_EditMenu_vue__WEBPACK_IMPORTED_MODULE_5__.default
 }, {
   name: 'menu-order',
-  path: '/menu-order/:id',
+  path: '/menu-order',
   component: _components_menu_OrderMenu_vue__WEBPACK_IMPORTED_MODULE_6__.default
 }];
 
@@ -39011,74 +39057,127 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-8" }, [
-                      _c(
-                        "div",
-                        { staticClass: "card-body" },
-                        [
-                          _c("h5", { staticClass: "card-title" }, [
-                            _vm._v(
-                              "\n                                        " +
-                                _vm._s(menu.menu_name) +
-                                "\n                                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "card-text" }, [
-                            _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("จำนวนคิวรอ " + _vm._s(1) + " คิว")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              on: {
-                                click: function($event) {
-                                  return _vm.OrderMenu(menu.id)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                        สั่งอาหาร\n                                    "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-info",
-                              attrs: {
-                                to: {
-                                  name: "menu-edit",
-                                  params: { id: menu.id }
-                                }
-                              }
-                            },
-                            [_vm._v("แก้ไข")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteMenu(menu.id)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                        ลบ\n                                    "
-                              )
-                            ]
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(menu.menu_name) +
+                              "\n                                    "
                           )
-                        ],
-                        1
-                      )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("b", { staticClass: "text-muted" }, [
+                            _vm._v("ราคา " + _vm._s(50) + " บาท")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("จำนวนคิวรอ " + _vm._s(1) + " คิว")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.isHidden,
+                                expression: "!isHidden"
+                              }
+                            ],
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.isHidden = !_vm.isHidden
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        สั่งอาหาร\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "form",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isHidden,
+                                expression: "isHidden"
+                              }
+                            ],
+                            staticClass: "row g-3",
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.OrderMenu($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: menu.id,
+                                  expression: "menu.id"
+                                }
+                              ],
+                              attrs: { type: "hidden", name: "id" },
+                              domProps: { value: menu.id },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(menu, "id", $event.target.value)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(0, true),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary add-btn",
+                                attrs: { type: "submit" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            สั่งอาหาร\n                                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.isHidden = !_vm.isHidden
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            ยกเลิก\n                                        "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ]
@@ -39091,7 +39190,27 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("input", {
+        staticClass: "form-control",
+        staticStyle: { width: "4rem" },
+        attrs: {
+          name: "orders_detail",
+          value: "1",
+          min: "1",
+          type: "number",
+          id: "exampleInputtext1",
+          "aria-describedby": "textHelp"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

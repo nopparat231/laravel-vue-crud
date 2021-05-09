@@ -30,7 +30,9 @@
             addMenu() {
                 this.axios
                     .post('http://localhost:8000/api/menus', this.menu)
-                    .then(response => console.log(response))
+                    .then(response  (
+                        this.$router.push({ name: 'menu-list' })
+                    ))
                     .catch(err => console.log(err))
                     .finally(() => this.loading = false)
             }

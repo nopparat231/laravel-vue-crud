@@ -41,7 +41,7 @@ export const routes = [
     },
     {
         name: 'menu-order',
-        path: '/menu-order/:id',
+        path: '/menu-order',
         component: OrderMenu
     }
 ];

@@ -20,18 +20,63 @@
                                             {{ menu.menu_name }}
                                         </h5>
                                         <p class="card-text">
+                                            <b class="text-muted"
+                                                >ราคา {{ 50 }} บาท</b
+                                            >
+                                        </p>
+                                        <p class="card-text">
                                             <small class="text-muted"
                                                 >จำนวนคิวรอ {{ 1 }} คิว</small
                                             >
                                         </p>
 
                                         <button
+                                            v-show="!isHidden"
+                                            @click="isHidden = !isHidden"
                                             class="btn btn-primary"
-                                            @click="OrderMenu(menu.id)"
                                         >
                                             สั่งอาหาร
                                         </button>
+                                        
+                                        <!-- ฟอร์มเก็บเมนู -->
+                                        <form
+                                            v-show="isHidden"
+                                            @submit.prevent="OrderMenu"
+                                            class="row g-3"
+                                        >
+                                            <input
+                                                type="hidden"
+                                                name="id"
+                                                v-model="menu.id"
+                                            />
+                                            <div class="col-auto">
+                                                <input
+                                                    name="orders_detail"
+                                                    value="1"
+                                                    style="width: 4rem"
+                                                    min="1"
+                                                    type="number"
+                                                    class="form-control"
+                                                    id="exampleInputtext1"
+                                                    aria-describedby="textHelp"
+                                                />
+                                            </div>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary add-btn"
+                                            >
+                                                สั่งอาหาร
+                                            </button>
 
+                                            <a
+                                                @click="isHidden = !isHidden"
+                                                class="btn btn-danger"
+                                            >
+                                                ยกเลิก
+                                            </a>
+                                        </form>
+
+                                        <!-- 
                                         <router-link
                                             :to="{
                                                 name: 'menu-edit',
@@ -45,7 +90,7 @@
                                             @click="deleteMenu(menu.id)"
                                         >
                                             ลบ
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +106,8 @@
 export default {
     data() {
         return {
-            menus: []
+            menus: [],
+            isHidden: false
         };
     },
     created() {
@@ -78,13 +124,12 @@ export default {
                     this.menus.splice(i, 1);
                 });
         },
-        OrderMenu(id) {
+        OrderMenu() {
             this.axios
-                .post(`http://localhost:8000/api/menus/${id}`)
-                .then(response => {
-                    let i = this.menus.map(data => data.id).indexOf(id);
-                    this.menus.splice(i, 1);
-                });
+                .post("http://localhost:8000/api/orders", this.order)
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
+                .finally(() => (this.loading = false));
         }
     }
 };
