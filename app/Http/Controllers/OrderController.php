@@ -14,17 +14,10 @@ class OrderController extends Controller
     }
 
     
-    public function store()
+    public function store(Request $request)
     {
-        $order = new Order([
-            'user_id'       => '1',
-            'menu_id'       => "tset11",
-            'orders_detail' => "test12",
-            'order_status'  => '0'
-        ]);
-        $order->save();
-
-        return response()->json('order created!');
+  
+        redirect('/home');
     }
 
     public function show($id)

@@ -6,6 +6,7 @@ import MenuList from './components/menu/MenuList.vue';
 import CreatMenu from './components/menu/CreatMenu.vue';
 import EditMenu from './components/menu/EditMenu.vue';
 import OrderMenu from './components/menu/OrderMenu.vue';
+import OrderList from './components/menu/ListOrder.vue';
  
 export const routes = [
     {
@@ -41,7 +42,12 @@ export const routes = [
     },
     {
         name: 'menu-order',
-        path: '/menu-order',
+        path: '/menu-order/:id',
         component: OrderMenu
+    },
+    {
+        name: 'order-list',
+        path: '/order-list',
+        component:OrderList
     }
 ];

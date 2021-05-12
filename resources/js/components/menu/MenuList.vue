@@ -30,53 +30,15 @@
                                             >
                                         </p>
 
-                                        <button
-                                            v-show="!isHidden"
-                                            @click="isHidden = !isHidden"
+                                        <router-link
+                                            :to="{
+                                                name: 'menu-order',
+                                                params: { id: menu.id }
+                                            }"
                                             class="btn btn-primary"
+                                            >สั่งอาหาร</router-link
                                         >
-                                            สั่งอาหาร
-                                        </button>
-                                        
-                                        <!-- ฟอร์มเก็บเมนู -->
-                                        <form
-                                            v-show="isHidden"
-                                            @submit.prevent="OrderMenu"
-                                            class="row g-3"
-                                        >
-                                            <input
-                                                type="hidden"
-                                                name="id"
-                                                v-model="menu.id"
-                                            />
-                                            <div class="col-auto">
-                                                <input
-                                                    name="orders_detail"
-                                                    value="1"
-                                                    style="width: 4rem"
-                                                    min="1"
-                                                    type="number"
-                                                    class="form-control"
-                                                    id="exampleInputtext1"
-                                                    aria-describedby="textHelp"
-                                                />
-                                            </div>
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary add-btn"
-                                            >
-                                                สั่งอาหาร
-                                            </button>
 
-                                            <a
-                                                @click="isHidden = !isHidden"
-                                                class="btn btn-danger"
-                                            >
-                                                ยกเลิก
-                                            </a>
-                                        </form>
-
-                                        <!-- 
                                         <router-link
                                             :to="{
                                                 name: 'menu-edit',
@@ -90,7 +52,7 @@
                                             @click="deleteMenu(menu.id)"
                                         >
                                             ลบ
-                                        </button> -->
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -103,17 +65,13 @@
 </template>
 
 <script>
-
 export default {
     data() {
         return {
             menus: [],
             isHidden: false,
-
-            order: [{
-                menu_id: "tes111",
-                orders_detail: "tset112"
-            }]
+            menu_id: "11",
+            orders_detail: "test12"
         };
     },
     created() {
@@ -132,7 +90,10 @@ export default {
         },
         OrderMenu() {
             this.axios
-                .post("http://localhost:8000/api/orders", this.order)
+                .post("http://localhost:8000/api/orders", {
+                    menu_id: this.menu_id,
+                    orders_detail: this.orders_detail
+                })
                 .then(response => console.log(response))
                 .catch(err => console.log(err))
                 .finally(() => (this.loading = false));
