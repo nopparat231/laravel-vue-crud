@@ -2107,9 +2107,11 @@ __webpack_require__.r(__webpack_exports__);
     addMenu: function addMenu() {
       var _this = this;
 
-      this.axios.post('http://localhost:8000/api/menus', this.menu).then(response(this.$router.push({
-        name: 'menu-list'
-      })))["catch"](function (err) {
+      this.axios.post('http://localhost:8000/api/menus', this.menu).then(function (response) {
+        return _this.$router.push({
+          name: 'menu-list'
+        });
+      })["catch"](function (err) {
         return console.log(err);
       })["finally"](function () {
         return _this.loading = false;
@@ -2299,7 +2301,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       menus: [],
-      isHidden: false
+      isHidden: false,
+      order: [{
+        menu_id: "tes111",
+        orders_detail: "tset112"
+      }]
     };
   },
   created: function created() {

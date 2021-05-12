@@ -103,11 +103,17 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
             menus: [],
-            isHidden: false
+            isHidden: false,
+
+            order: [{
+                menu_id: "tes111",
+                orders_detail: "tset112"
+            }]
         };
     },
     created() {

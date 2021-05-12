@@ -14,12 +14,12 @@ class OrderController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function store()
     {
         $order = new Order([
             'user_id'       => '1',
-            'menu_id'       => $request->input('id'),
-            'orders_detail' => $request->input('orders_detail'),
+            'menu_id'       => "tset11",
+            'orders_detail' => "test12",
             'order_status'  => '0'
         ]);
         $order->save();
