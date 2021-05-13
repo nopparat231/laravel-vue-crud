@@ -12,6 +12,8 @@ import VueAxios from "vue-axios";
 import VueRouter from "vue-router";
 import axios from "axios";
 import { routes } from "./routes";
+import MyComponent from "./components/menu/MyComponent.vue";
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -28,6 +30,9 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: "#app",
+    computed: {
+        MyComponent
+    },
     router: router,
     render: h => h(App)
 });

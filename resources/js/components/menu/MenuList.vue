@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="text-center">Menu List</h2>
-
+<MyComponent />
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -65,6 +65,8 @@
 </template>
 
 <script>
+
+
 export default {
     data() {
         return {
@@ -98,6 +100,9 @@ export default {
                 .catch(err => console.log(err))
                 .finally(() => (this.loading = false));
         }
-    }
+    },
+
+
+    
 };
 </script>

@@ -28,6 +28,7 @@
                                                 >จำนวนคิวรอ {{ 1 }} คิว</small
                                             >
                                         </p>
+                                          <button type="submit" class="btn btn-primary">สั้งซื้อ</button>
                                     </div>
                                 </div>
                             </div>
@@ -37,10 +38,14 @@
             </div>
         </div>
     </div>
+
+    
 </template>
 
 <script>
+
 export default {
+
     data() {
         return {
             menu: {}
@@ -62,5 +67,6 @@ export default {
                 .finally(() => (this.loading = false));
         }
     }
+    
 };
 </script>
